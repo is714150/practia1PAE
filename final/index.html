@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practica1</title>
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.6/handlebars.min.js"></script>
+</head>
+<body>
+    <form class="search" action="">
+        <input class="input" type="text" placeholder="Buscar" name="search">
+        <input type="submit" name="boton">
+    </form>
+
+    <div class="news-container">
+        {{#each news}}
+        <div class="news-item">
+            <img src="{{urlToImage}}" />
+            <h2>{{title}}</h2>
+            <p>{{description}}</p>
+            <a href="{{url}}" target="_blank">Ver más</a>
+        </div>
+        {{/each}}
+    </div>
+    
+
+    <script src="./scripts/main.js"></script>
+</body>
+</html>
