@@ -1,0 +1,9 @@
+  {
+    "include": ["src/**/*.ts"],
+    "exclude": ["src/node_modules", "**/*.spec.ts"],
+    "compilerOptions": {
+    "noImplicitAny": true,
+    "outDir": "final",
+    "target": "ES6"
+    }
+}
