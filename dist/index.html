@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News</title>
+    <link rel="stylesheet" href="assets/styles/styles.css">
+</head>
+<body>
+    <script type='text/javascript' src='handlebars-v4.7.6.js'></script>
+    
+
+    <div class="row">
+        <div class="headTitle">
+        <h2>Aplicacion de noticias ITESO</h2>
+        </div>
+    </div>
+    
+    <form class="search" action="">
+            <label for=""></label>
+        <input class = "col-4 input" type="text" placeholder="Buscar noticia"><br>
+        <input type="submit">
+    </form>
+
+    <script id="responsiveTemplate" type="text/x-handlebars-template">
+        {{#each articles}}
+            <div class="col-1 table">
+                <li>
+                    <div class="photo">
+                         <img src="{{urlToImage}}" alt="">
+                    </div>
+                     <div class="info">
+                        <p>{{content}}</p>
+                     </div>
+                    <div class="description">
+                         <p>{{description}}</p>
+                    </div>
+                    <div class="urlButton">
+                        <form action="{{url}}">
+                            <input type="submit" value="Read More" />
+                        </form>
+                    </div>
+
+                </li>
+            </div>
+        {{/each}}
+    </script>
+
+
+    <div class="page-grap">
+        <div id="news-container"></div>
+
+    </div>
+
+    <script>
+        const searchForm = document.querySelector('.search');
+        const input = document.querySelector('.input');
+        var container = document.getElementById('.myContainer');
+
+        searchForm.addEventListener('submit', retrieve)
+
+        function retrieve(e){
+
+            e.preventDefault();
+
+            const apiKey = '7bd887589a4c40de8ef0fda2fd16c026';
+
+            let topic = input.value;
+
+            let url = `https://newsapi.org/v2/everything?q=${topic}&apiKey=${apiKey}`
+
+            fetch(url).then((res)=>{
+                return res.json();
+
+            }).then((data)=>{
+                console.log(data)
+                const rawTemplate = document.getElementById("responsiveTemplate").innerHTML; 
+                const compiledTemplate = Handlebars.compile(rawTemplate);
+                const ourGeneratedHTML = compiledTemplate(data);
+                const newscontain = document.getElementById("news-container");
+                newscontain.innerHTML = ourGeneratedHTML;
+               
+            })
+        }
+    </script>
+
+</body>
+</html>
